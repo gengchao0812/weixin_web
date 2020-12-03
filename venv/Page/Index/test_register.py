@@ -3,16 +3,18 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
 import time
+import pytest
 
 class TestRegister:
     #继承Index类
 
     def setup(self):
         self.index=Index()
-
-    def test_register(self):
+        
+    @pytest.mark.parametrize("corp_name",["名字1","名字2","名字3"])
+    def test_register(self,corp_name):
         #按照步骤编写流程
-        resurt=self.index.goto_register().register("这里是企业名称")
+        resurt=self.index.goto_register().register(corp_name)
         time.sleep(3)
         WebDriverWait(self.index.driver,10).until(EC.visibility_of_element_located((By.CLASS_NAME,'register_result_fromThirdAuthInner')))
         title=self.index.driver.find_element_by_xpath('//*[@class="register_result_fromThirdAuth"]/div[2]')
