@@ -13,7 +13,7 @@ class Register(BasePage):
     def __init__(self, driver: WebDriver):
         self.driver = driver
     
-    def register(self,corp_name,manager_name):
+    def register(self,corp_name):
         #企业名称
         self.driver.find_element_by_xpath('//*[@id="corp_name"]').send_keys(corp_name)
         #行业类型
@@ -22,11 +22,12 @@ class Register(BasePage):
         self.driver.find_element_by_xpath('//*[@data-value="1001000"]').click()
         #人员规模
         self.driver.find_element_by_xpath('//*[@id="corp_scale_btn"]').click()
-        self.driver.find_element_by_xpath('//*[@data-value="2001"]').click()
+        data_value = self.get_data_value()
+        self.driver.find_element_by_xpath(f'//*[@data-value="{data_value}"]').click()
         #勾选框
         self.driver.find_element_by_xpath('//*[@id="iagree"]').click()
         #管理员姓名
-        self.driver.find_element_by_xpath('//*[@id="manager_name"]').send_keys(manager_name)
+        self.driver.find_element_by_xpath('//*[@id="manager_name"]').send_keys("耿超")
         #管理员手机号
         self.driver.find_element_by_xpath('//*[@id="register_tel"]').send_keys("15810179927")
         #获取手机验证码

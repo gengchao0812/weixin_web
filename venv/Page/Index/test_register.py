@@ -12,7 +12,7 @@ class TestRegister:
 
     def test_register(self):
         #按照步骤编写流程
-        resurt=self.index.goto_register().register("这里是企业名称","这里是姓名")
+        resurt=self.index.goto_register().register("这里是企业名称")
         time.sleep(3)
         WebDriverWait(self.index.driver,10).until(EC.visibility_of_element_located((By.CLASS_NAME,'register_result_fromThirdAuthInner')))
         title=self.index.driver.find_element_by_xpath('//*[@class="register_result_fromThirdAuth"]/div[2]')
