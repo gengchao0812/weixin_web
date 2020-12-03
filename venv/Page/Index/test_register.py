@@ -4,14 +4,17 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
 import time
 import pytest
+import allure
 
 class TestRegister:
     #继承Index类
 
     def setup(self):
         self.index=Index()
-        
+
+    @allure.feature('注册模块')
     @pytest.mark.parametrize("corp_name",["名字1","名字2","名字3"])
+    @allure.story('注册失败')
     def test_register(self,corp_name):
         #按照步骤编写流程
         resurt=self.index.goto_register().register(corp_name)

@@ -5,6 +5,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from Page.Index.base_page import BasePage
 import time
 import yaml
+import allure
 
 class Register(BasePage):
     """
@@ -15,6 +16,7 @@ class Register(BasePage):
     
     def register(self,corp_name):
         #企业名称
+        
         self.driver.find_element_by_xpath('//*[@id="corp_name"]').send_keys(corp_name)
         #行业类型
         self.driver.find_element_by_xpath('//*[@id="corp_industry"]').click()
