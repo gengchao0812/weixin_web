@@ -6,9 +6,10 @@ import time
 import pytest
 import allure
 
-class TestRegister:
-    #继承Index类
 
+class TestRegister:
+
+    #继承Index类
     def setup(self):
         self.index=Index()
 
@@ -19,8 +20,9 @@ class TestRegister:
         #按照步骤编写流程
         resurt=self.index.goto_register().register(corp_name)
         time.sleep(3)
-        WebDriverWait(self.index.driver,10).until(EC.visibility_of_element_located((By.CLASS_NAME,'register_result_fromThirdAuthInner')))
-        title=self.index.driver.find_element_by_xpath('//*[@class="register_result_fromThirdAuth"]/div[2]')
+        # WebDriverWait(self.index.driver,10).until(EC.visibility_of_element_located((By.CLASS_NAME,'register_result_fromThirdAuthInner')))
+        # title=self.index.driver.find_element_by_xpath('//*[@class="register_result_fromThirdAuth"]/div[2]')
+        title = self.index._driver.find_element_by_xpath('//*[@class="register_result_fromThirdAuth"]/div[2]')
         assert title.text == '注册成功，扫码下载企业微信使用'
     #
     # def teardown(self):
