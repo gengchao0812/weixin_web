@@ -39,15 +39,23 @@ class Register(BasePage):
         #手动填写验证码和扫描微信
         #点击注册
         # WebDriverWait(self.driver,30,1).until(EC.visibility_of_element_located(title))
-        time.sleep(20)
+        # time.sleep(20)
         # title = self.driver.find_element_by_xpath('//*[@class="register_result_fromThirdAuth"]')
         # print(title.text)
-        self._driver.find_element_by_xpath('//*[@id="submit_btn"]').click()
-        self._driver.implicitly_wait(10)
         try:
-            WebDriverWait(self.index._driver,10).until(EC.visibility_of_element_located((By.CLASS_NAME,'register_result_fromThirdAuthInner')))
+            WebDriverWait(self.index._driver, 40).until(
+                EC.visibility_of_element_located((By.CLASS_NAME, 'ww_scanCodeCard_info_title')))
         except AttributeError:
             time_now=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
             a='%s_%s.png'.format(corp_name,time_now)
             self._driver.save_screenshot('{}_{}.png'.format(corp_name,time_now))
+        else:
+            self._driver.find_element_by_xpath('//*[@id="submit_btn"]').click()
+            self._driver.implicitly_wait(10)
+        # try:
+        #     WebDriverWait(self.index._driver,10).until(EC.visibility_of_element_located((By.CLASS_NAME,'ww_scanCodeCard_info_title')))
+        # except AttributeError:
+        #     time_now=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        #     a='%s_%s.png'.format(corp_name,time_now)
+        #     self._driver.save_screenshot('{}_{}.png'.format(corp_name,time_now))
 
