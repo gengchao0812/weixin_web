@@ -1,5 +1,6 @@
 from Page.Index.base_page import BasePage
 import time
+
 class Contacts_Page(BasePage):
     """
     通讯录按钮事件

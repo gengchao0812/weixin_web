@@ -40,4 +40,11 @@ class BasePage():
         self._list.append(data_value[n])
         return data_value[n]
 
-
+    #生成时间戳随机数
+    def get_random_time(self):
+        nowTime = datetime.datetime.now().strftime("%Y%m%d%H%M%S");
+        randomNum = random.randint(0, 99);
+        if randomNum <= 10:
+            randomNum = str(0) + str(randomNum);
+        uniqueNum = str(nowTime) + str(randomNum);
+        return uniqueNum
