@@ -6,6 +6,8 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 import random
 import yaml
+import datetime
+
 
 class BasePage():
 
@@ -41,6 +43,7 @@ class BasePage():
         return data_value[n]
 
     #生成时间戳随机数
+    @property
     def get_random_time(self):
         nowTime = datetime.datetime.now().strftime("%Y%m%d%H%M%S");
         randomNum = random.randint(0, 99);
@@ -48,3 +51,9 @@ class BasePage():
             randomNum = str(0) + str(randomNum);
         uniqueNum = str(nowTime) + str(randomNum);
         return uniqueNum
+
+    def get_random_telphone(self):
+        nowTime = datetime.datetime.now().strftime("%d%H%M%S")
+        a = 158
+        return (str(a) + str(nowTime))
+

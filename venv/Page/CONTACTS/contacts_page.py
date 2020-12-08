@@ -1,5 +1,6 @@
 from Page.Index.base_page import BasePage
 import time
+from Page.CONTACTS.contacts_add import ContactsAdd
 
 class Contacts_Page(BasePage):
     """
@@ -7,7 +8,8 @@ class Contacts_Page(BasePage):
     """
     #添加成员
     def goto_contacts_add(self):
-        self._driver.find_element_by_xpath('//*[@class="qui_btn ww_btn js_add_member"]').click()
+        self._driver.find_elements_by_xpath('//*[@class="qui_btn ww_btn js_add_member"]')[2].click()
+        return ContactsAdd(self._driver)
 
     #导入导出
     def goto_in_out(self):
