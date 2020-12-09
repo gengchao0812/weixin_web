@@ -20,3 +20,9 @@ class Contacts_Page(BasePage):
         self._driver.find_element_by_xpath('//*[@class="ww_icon ww_icon_WeChatInviteInToolbar"]/..').click()
         time.sleep(1)
         self._driver.find_element_by_xpath('//*[@class="index_exploreDownloadDialog_pcLink"]').click()
+
+    #翻页功能
+    def goto_next_back(self):
+        self._driver.find_elements_by_xpath('//*[@class="ww_pageNav_info_arrowWrap js_next_page"]')[1].click()
+        time.sleep(1)
+        self._driver.find_elements_by_xpath('//*[@class="ww_pageNav_info_arrowWrap js_pre_page"]')[1].click()

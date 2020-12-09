@@ -18,7 +18,8 @@ class TestContacts():
     # 获取当前文件的Realpath  D:\WorkSpace\StudyPractice\Python_Yaml\YamlStudy\YamlDemo.py
     fileNamePath = os.path.split(os.path.realpath(__file__))[0]
     #新增通讯录功能
-    @pytest.mark.run(order=1)
+    @pytest.mark.skip
+    # @pytest.mark.run(order=1)
     @pytest.mark.parametrize("username,englishname",yaml.safe_load(open(f"{fileNamePath}/name.yml",encoding='utf-8')))
     def test_contacts_add_new(self,username,englishname):
         self.index.goto_contacts().goto_contacts_add().contacts_new(username,englishname)
@@ -33,3 +34,6 @@ class TestContacts():
         # assert self.index._driver.find_element_by_xpath('//*[@id="party_name"]').text == '霍格沃兹'
         assert WebDriverWait(self.index._driver,10).until(EC.visibility_of_element_located((By.ID,'js_tips')))
         self.index._driver.find_element_by_xpath('//*[@class="qui_dialog ww_dialog ww_dialog_NoFoot index_exploreDownloadDialog"]/div[1]/a[1]').click()
+
+    def test_go_back(self):
+        self.index.goto_contacts().goto_next_back()
