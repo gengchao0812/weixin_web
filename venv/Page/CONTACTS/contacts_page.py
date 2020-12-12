@@ -1,6 +1,7 @@
 from Page.Index.base_page import BasePage
 import time
 from Page.CONTACTS.contacts_add import ContactsAdd
+import re
 
 class Contacts_Page(BasePage):
     """
@@ -23,6 +24,14 @@ class Contacts_Page(BasePage):
 
     #翻页功能
     def goto_next_back(self):
-        self._driver.find_elements_by_xpath('//*[@class="ww_pageNav_info_arrowWrap js_next_page"]')[1].click()
-        time.sleep(1)
-        self._driver.find_elements_by_xpath('//*[@class="ww_pageNav_info_arrowWrap js_pre_page"]')[1].click()
+        _PageNumber = self._driver.find_elements_by_xpath('//*[@class="ww_pageNav_info_text"]')[1].text
+        #（.+？）和（.*?）  一个及以上的匹配和任意多个匹配的区别  $ 取到尾
+        PageNumberMax = re.findall('1/(.+?)$',_PageNumber)
+        print(f"PageNumberMax={PageNumberMax}")
+        for i in range(int(PageNumberMax[0])-1):
+            self._driver.find_elements_by_xpath('//*[@class="ww_pageNav_info_arrowWrap js_next_page"]')[1].click()
+            time.sleep(1)
+        for i in range(int(PageNumberMax[0]) - 1):
+            self._driver.find_elements_by_xpath('//*[@class="ww_pageNav_info_arrowWrap js_pre_page"]')[1].click()
+            time.sleep(1)
+        return _PageNumber
