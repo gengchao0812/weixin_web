@@ -2,6 +2,7 @@ from Page.Index.base_page import BasePage
 import time
 from Page.CONTACTS.contacts_add import ContactsAdd
 import re
+from Page.CONTACTS.party_add import PartyAdd
 
 class Contacts_Page(BasePage):
     """
@@ -14,13 +15,22 @@ class Contacts_Page(BasePage):
 
     #导入导出
     def goto_in_out(self):
-        self._driver.find_element_by_xpath('//*[@class="ww_btn_PartDropdown_left"]').click()
+        self._driver.find_element_by_link_text('批量导入/导出').click()
+        self._driver.find_element_by_link_text('文件导入').click()
+        self._driver.find_element_by_xpath('//*[@class="ww_fileImporter_fileContainer_uploadInputMask"]').send_keys('H:\\333_test.xlsx')
+        self._driver.find_element_by_link_text('导入').click()
 
     #点击邀请
     def goto_Invitation(self):
         self._driver.find_element_by_xpath('//*[@class="ww_icon ww_icon_WeChatInviteInToolbar"]/..').click()
         time.sleep(1)
         self._driver.find_element_by_xpath('//*[@class="index_exploreDownloadDialog_pcLink"]').click()
+
+    #添加部门
+    def goto_party_add(self):
+        self._driver.find_element_by_xpath('//*[@class="member_colLeft_top_addBtnWrap js_create_dropdown"]').click()
+        self._driver.find_element_by_xpath('//*[@class="js_create_party"]').click()
+        return PartyAdd()
 
     #翻页功能
     def goto_next_back(self):
